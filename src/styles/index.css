@@ -482,3 +482,210 @@ h1, h2, h3, h4, h5, h6 {
     display: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE UTILITIES
+═══════════════════════════════════════════════════ */
+
+/* Desktop-only: visible on ≥769px, hidden on mobile */
+.desktop-only {
+  display: flex !important;
+}
+
+/* Mobile-only: hidden on desktop, visible on ≤768px */
+.mobile-only {
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   BOTTOM NAV (Mobile App-style Tab Bar)
+═══════════════════════════════════════════════════ */
+.bottom-nav {
+  display: none; /* hidden on desktop */
+}
+
+/* ═══════════════════════════════════════════════════
+   MOBILE BREAKPOINT  ≤ 768px
+═══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Utility overrides ── */
+  .desktop-only { display: none !important; }
+  .mobile-only  { display: flex !important; }
+
+  /* ── App layout: stack vertically ── */
+  .app-container {
+    flex-direction: column;
+  }
+
+  /* ── Main content: full width, scroll with bottom nav gap ── */
+  .main-content {
+    height: 100dvh;
+    overflow-y: auto;
+    padding-bottom: 72px; /* height of bottom nav */
+  }
+
+  /* ── Content body: tighter padding on mobile ── */
+  .content-body {
+    padding: 1rem;
+  }
+
+  /* ── Cards: reduce padding ── */
+  .card {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  /* ── Tables: ensure horizontal scroll ── */
+  .table-container {
+    -webkit-overflow-scrolling: touch;
+  }
+  .custom-table {
+    font-size: 0.8rem;
+  }
+  .custom-table th,
+  .custom-table td {
+    padding: 0.75rem;
+    white-space: nowrap;
+  }
+
+  /* ── Modals: full-screen on mobile ── */
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .modal-container {
+    border-radius: 20px 20px 0 0;
+    max-width: 100%;
+    max-height: 92dvh;
+    animation: slideUpMobile 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Bottom Nav: visible on mobile ── */
+  .bottom-nav {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 950;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
+    /* Safe area for iOS home indicator */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .bottom-nav-inner {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    overflow-x: auto;
+    padding: 0 0.25rem;
+    /* Hide scrollbar but keep scrollable */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .bottom-nav-inner::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bottom-nav-btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    flex: 1 0 56px;
+    min-width: 56px;
+    max-width: 80px;
+    height: 52px;
+    background: none;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0.25rem 0.35rem;
+    transition: color 0.2s ease, transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .bottom-nav-btn:active {
+    transform: scale(0.92);
+  }
+  .bottom-nav-btn--active {
+    color: var(--primary);
+  }
+
+  /* Active pill background */
+  .bottom-nav-pill {
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 30px;
+    background: var(--primary-light);
+    border-radius: 10px;
+    z-index: 0;
+    animation: pillPop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .bottom-nav-icon {
+    position: relative;
+    z-index: 1;
+  }
+
+  .bottom-nav-label {
+    font-size: 0.58rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── TopBar: compact on mobile ── */
+  .topbar-role-switcher {
+    display: none !important;
+  }
+  .topbar-profile-name {
+    display: none !important;
+  }
+
+  /* ── Auth card: full width on mobile ── */
+  .auth-card-wrapper {
+    padding: 1rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   SMALL MOBILE  ≤ 480px
+═══════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .content-body {
+    padding: 0.75rem;
+  }
+  .card {
+    padding: 0.875rem;
+  }
+  .btn {
+    font-size: 0.82rem;
+    padding: 0.65rem 0.9rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════════ */
+@keyframes slideUpMobile {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes pillPop {
+  from { transform: translateX(-50%) scale(0.6); opacity: 0; }
+  to   { transform: translateX(-50%) scale(1);   opacity: 1; }
+}

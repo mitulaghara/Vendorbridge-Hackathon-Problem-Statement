@@ -31,11 +31,10 @@ export default function Sidebar({ currentUser, activeScreen, onNavigate, onReset
   );
 
   return (
-    <aside className="no-print" style={{
+    <aside className="no-print desktop-only" style={{
       width: '260px',
       background: 'var(--bg-card)',
       borderRight: '1px solid var(--border-color)',
-      display: 'flex',
       flexDirection: 'column',
       height: '100vh',
       position: 'sticky',

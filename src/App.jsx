@@ -4,6 +4,7 @@ import { db } from './utils/mockData';
 
 // Layout Components
 import Sidebar from './components/layout/Sidebar';
+import BottomNav from './components/layout/BottomNav';
 import TopBar from './components/layout/TopBar';
 import AuthScreen from './components/auth/AuthScreen';
 
@@ -297,12 +298,14 @@ export default function App() {
   // ── Main ERP Layout ──────────────────────────────────────────────
   return (
     <div className="app-container">
+      {/* Desktop: left sidebar */}
       <Sidebar
         currentUser={currentUser}
         activeScreen={activeScreen}
         onNavigate={setActiveScreen}
         onResetDB={handleResetDB}
       />
+
       <main className="main-content">
         <TopBar
           currentUser={currentUser}
@@ -318,6 +321,13 @@ export default function App() {
           {renderScreen()}
         </div>
       </main>
+
+      {/* Mobile: bottom tab bar */}
+      <BottomNav
+        currentUser={currentUser}
+        activeScreen={activeScreen}
+        onNavigate={setActiveScreen}
+      />
     </div>
   );
 }
