@@ -259,7 +259,7 @@ vendorbridge-erp/
 
 ## 👩‍💻 Author
 
-**Yashvi Bhut**
+**Mitul Aghara**
 
 Built with ❤️ for the **VendorBridge Hackathon**
 
